@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+_schema-version: '3.1'
+ID: logaligroup.employees
+version: '1.0.0'
+
+modules:
+  - name: employees_ui
+    type: html5
+    path: webapp
+    parameters:
+      UI5-application: true  # Aquí no hace falta usar un "-". Solo clave: valor.
+
+resources:
+  - name: employees_db
+    type: hana
+    parameters:
+      schema: my_schema
