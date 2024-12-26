@@ -6,30 +6,25 @@ sap.ui.define([
         onInit: function () {
             let oView = this.getView();
             let i18nBundle = oView.getModel("i18n").getResourceBundle();
-            // let oJson = {
-            //     employeeId: "12345",
-            //     countryKey: "UK",
-            //     listCountry: [{ key: "US", text: i18nBundle.getText("countryUS") },
-            //     { key: "UK", text: i18nBundle.getText("countryUK") },
-            //     { key: "ES", text: i18nBundle.getText("countryES") },]
-            // }
-            //oJSONModel.setData(oJson);
-            //let oJSONModel = new sap.ui.model.json.JSONModel();
-            //oJSONModel.loadData("../localService/mockdata/employee.json", false);     
-           // oJSONModel.attachRequestCompleted(function (oEventModel) {
-            //    console.log(JSON.stringify(oJSONModel.getData()))
-            //});
-            //oView.setModel(oJSONModel,"odataNorthwind");
 
             oJSONModel = new sap.ui.model.json.JSONModel();
-            oJSONModel.loadData("../localService/mockdata/Countries.json", false);
+            oJSONModel.loadData("../model/json/employee.json", false);
+            oJSONModel.attachRequestCompleted(function (oEventModel) {
+                console.log(JSON.stringify(oJSONModel.getData()))
+            });
+            oView.setModel(oJSONModel,"jsonemployee");
+
+
+
+            oJSONModel = new sap.ui.model.json.JSONModel();
+            oJSONModel.loadData("../model/json/Countries.json", false);
             oJSONModel.attachRequestCompleted(function (oEventModel) {
                 console.log(JSON.stringify(oJSONModel.getData()))
             });
             oView.setModel(oJSONModel,"jsonCountries");
 
             let oJSONModelLayout = new sap.ui.model.json.JSONModel();
-            oJSONModelLayout.loadData("../localService/mockdata/Layout.json", false);
+            oJSONModelLayout.loadData("../model/json/Layout.json", false);
             oJSONModelLayout.attachRequestCompleted(function (oEventModel) {
                 console.log(JSON.stringify(oJSONModelLayout.getData()))
             });

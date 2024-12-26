@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "build.mta",
+			"label": "build.mta: Build MTA: logaligroup.lists/mta.yaml",
+			"taskType": "Build",
+			"projectPath": "/home/user/sapui5_advanced/employees",
+			"extensions": [],
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

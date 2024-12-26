@@ -5,7 +5,13 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
 
-], function (Controller, History, Messagebox, Filter, FilterOperator) {
+], 
+/**
+ *  @param {typeof sap.ui.core.mvc.Controller} Controller 
+ *  @param {typeof sap.ui.model.Filter} Filter 
+ *  @param {typeof sap.ui.model.FilterOperator} FilterOperator 
+ */
+function (Controller, History, Messagebox, Filter, FilterOperator) {
 
     function _onObjectMatched(oEvent) {
         this.onClearSignature(oEvent);
@@ -14,7 +20,7 @@ sap.ui.define([
             model: "odataNorthwind",
             events: {
                 dataReceived: function(oData){
-                    _readSignature.bind(this)(oData.getParameter("data").OrderID, (oData.getParameter("data").EmployeeID);
+                    _readSignature.bind(this)(oData.getParameter("data").OrderID, oData.getParameter("data").EmployeeID);
                 }.bind(this)
             }
         });
@@ -37,22 +43,24 @@ sap.ui.define([
                     signature.setSignature("data:image/png;base64," + data.MediaContent);
                 }
             }.bind(this),
-            error: function () {
+            error: function (data) {
                 Messagebox.information(oResourceBundle.getText("signatureNotSave"));
             }
         });
-        //read Files
+
+        //Bind Files
+    
         this.biId("uploadCollection").bindAggregation("items",{
-            path: "incidenceModel>/FileSet",
-            filters: [ new.filter("OrderId", FilterOperator.EQ, orderId),
-            new.filter("SapId", FilterOperator.EQ, this.getOwnerComponent().SapId),
-            new.filter("EmployeeId", FilterOperator.EQ, employeeId)
+            path: "incidenceModel>/FilesSet",
+            filters: [ new Filter("OrderId", FilterOperator.EQ, orderId),
+            new Filter("SapId", FilterOperator.EQ, this.getOwnerComponent().SapId),
+            new Filter("EmployeeId", FilterOperator.EQ, employeeId)
             ],
-            template: sap.m.oUploadCollectionItem({
+            template: sap.m.UploadCollectionItem({
                 documentId: "{incidenceModel>AttId}",
                 visibleEdit: false,
                 fileName: "{incidenceModel>FileName}"
-            }).attachPress(this.downloadfile)
+            }).attachPress(this.downloadFile)
         })
     }
 
@@ -93,9 +101,9 @@ sap.ui.define([
                 let customListItem = new sap.m.customListItem({
                     content: [
                         new sap.m.Bar({
-                            contentLeft: new.sap.Label({ text: "{odataNorthwind>/Products(" + contextObject.ProductId + ")/ProductName} ({odataNorthwind>Quantity})" }),
-                            contentMiddle: new.sap.ObjectStatus({ text: "{i18n>availableStock} {odataNorthwind>/Products(" + contextObject.ProductId + ")/UnitsInStock}", state: "Error" }),
-                            contentRight: new.sap.Label({ text: "{ parts : [ { path: 'odataNorthwind>UnitPrice'}, { path: 'odataNorthwind>Currency'} ], type: 'sap.ui.model.type.Currency'}" })
+                            contentLeft: new sap.Label({ text: "{odataNorthwind>/Products(" + contextObject.ProductId + ")/ProductName} ({odataNorthwind>Quantity})" }),
+                            contentMiddle: new sap.ObjectStatus({ text: "{i18n>availableStock} {odataNorthwind>/Products(" + contextObject.ProductId + ")/UnitsInStock}", state: "Error" }),
+                            contentRight: new sap.Label({ text: "{ parts : [ { path: 'odataNorthwind>UnitPrice'}, { path: 'odataNorthwind>Currency'} ], type: 'sap.ui.model.type.Currency'}" })
                         })
                     ]
                 })
@@ -142,6 +150,8 @@ sap.ui.define([
 
         onfileChange: function(oEvent){
             let oUploadCollection = oEvent.getSource();
+
+            //Header token CSRF - cross-site request forgery
             let ocustomerHeaderToken = new  sap.m.UploadCollectionParameter({
                 name: "x-csrf-token",
                 value: this.getView().getModel("incidenceModel").getSecurityToken()
