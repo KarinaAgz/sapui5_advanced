@@ -39,7 +39,7 @@
                                     <f:FormElement label="{i18n>orderDate}">
                                         <f:fields>
                                             <Text
-                                                text="{ path: 'odataNorthwind>OrderDate', type; 'sap.ui.model.odata.type.Date'}"
+                                                text="{ path: 'odataNorthwind>OrderDate', type: 'sap.ui.model.odata.type.Date'}"
                                             />
                                         </f:fields>
                                     </f:FormElement>
@@ -60,7 +60,7 @@
                                     <f:FormElement label="{i18n>shipAddress}">
                                         <f:fields>
                                             <Text
-                                                text="{odataNorthwind>ShipAddress} {odataNorthwind>ShipCity} {odataNorthwind>ShipCountry}"
+                                                text="{odataNorthwind>ShipAddress}, {odataNorthwind>ShipCity} ,{odataNorthwind>ShipCountry}"
                                             />
                                         </f:fields>
                                     </f:FormElement>

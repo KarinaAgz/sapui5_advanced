@@ -1,7 +1,7 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
+    "sap/ui/model/FilterOperator"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -23,17 +23,17 @@ sap.ui.define([
             //oJSONModel.setData(oJson);
             let oJSONModel = new sap.ui.model.json.JSONModel();
             oJSONModel.loadData("../localService/mockdata/employee.json", false);
-            
+
             oJSONModel.attachRequestCompleted(function (oEventModel) {
                 console.log(JSON.stringify(oJSONModel.getData()))
             });
-            oView.setModel(oJSONModel,"odataNorthwind");
+            oView.setModel(oJSONModel, "odataNorthwind");
             oJSONModel = new sap.ui.model.json.JSONModel();
             oJSONModel.loadData("../localService/mockdata/Countries.json", false);
             oJSONModel.attachRequestCompleted(function (oEventModel) {
                 console.log(JSON.stringify(oJSONModel.getData()))
             });
-            oView.setModel(oJSONModel,"jsonCountries");
+            oView.setModel(oJSONModel, "jsonCountries");
 
             let oJSONConfig = new sap.ui.model.json.JSONModel({
                 visibleID: true,
@@ -44,7 +44,7 @@ sap.ui.define([
                 visibleBtnHideCity: false
             });
 
-            oView.setModel(oJSONConfig,"jsonConfig");            
+            oView.setModel(oJSONConfig, "jsonConfig");
         };
         function onFilter() {
             let oJSON = this.getView().getModel("jsonCountries").getData();
@@ -85,117 +85,117 @@ function myCheck() {
     }
 };
 */
-function onShowCity() {
-    let oJsonModelConfig = this.getView().getModel("jsonConfig");
-    oJsonModelConfig.setProperty("/visibleCity",true);
-    oJsonModelConfig.setProperty("/visibleBtnShowCity",false);
-    oJsonModelConfig.setProperty("/visibleBtnHideCity",true);
+        function onShowCity() {
+            let oJsonModelConfig = this.getView().getModel("jsonConfig");
+            oJsonModelConfig.setProperty("/visibleCity", true);
+            oJsonModelConfig.setProperty("/visibleBtnShowCity", false);
+            oJsonModelConfig.setProperty("/visibleBtnHideCity", true);
 
-};
- function onHideCity() {
-    let oJsonModelConfig = this.getView().getModel("jsonConfig");
-    oJsonModelConfig.setProperty("/visibleCity",false);
-    oJsonModelConfig.setProperty("/visibleBtnShowCity",true);
-    oJsonModelConfig.setProperty("/visibleBtnHideCity",false);
+        };
+        function onHideCity() {
+            let oJsonModelConfig = this.getView().getModel("jsonConfig");
+            oJsonModelConfig.setProperty("/visibleCity", false);
+            oJsonModelConfig.setProperty("/visibleBtnShowCity", true);
+            oJsonModelConfig.setProperty("/visibleBtnHideCity", false);
 
-};
+        };
 
-function showOrders2(oEvent){
-    let itemPressed = oEvent.getSource();
-    let oContext = itemPressed.getBindingContext("odataNorthwind");
-    if(!this._oDialogOrders){
-    this._oDialogOrders = sap.ui.xmlfragment("logaligroup.employees.fragment.DialogOrders", this);
-    this.getView().addDependent(this._oDialogOrders);
-    }
-    this._oDialogOrders.bindElement("odataNorthwind>" + oContext.getPath());
-    this._oDialogOrders.open();
+        function showOrders2(oEvent) {
+            let itemPressed = oEvent.getSource();
+            let oContext = itemPressed.getBindingContext("odataNorthwind");
+            if (!this._oDialogOrders) {
+                this._oDialogOrders = sap.ui.xmlfragment("logaligroup.employees.fragment.DialogOrders", this);
+                this.getView().addDependent(this._oDialogOrders);
+            }
+            this._oDialogOrders.bindElement("odataNorthwind>" + oContext.getPath());
+            this._oDialogOrders.open();
 
-}
+        }
 
-function onCloseOrders(){
-    this._oDialogOrders.close();
-}
+        function onCloseOrders() {
+            this._oDialogOrders.close();
+        }
 
-function showOrders(oEvent) {
-    let ordersTable = this.getView().byId("ordersTable");
-    let ordersTable2 = this.getView().byId("ordersTable2");
-    ordersTable.destroyItems();
-    ordersTable2.destroyItems();
-    let itemPressed = oEvent.getSource();
-    let oContext = itemPressed.getBindingContext("odataNorthwind");
-    let oObjectContext = oContext.getObject();
-    let orders = oObjectContext.Orders;
-    let orderItems = [];
+        function showOrders(oEvent) {
+            let ordersTable = this.getView().byId("ordersTable");
+            let ordersTable2 = this.getView().byId("ordersTable2");
+            ordersTable.destroyItems();
+            ordersTable2.destroyItems();
+            let itemPressed = oEvent.getSource();
+            let oContext = itemPressed.getBindingContext("odataNorthwind");
+            let oObjectContext = oContext.getObject();
+            let orders = oObjectContext.Orders;
+            let orderItems = [];
 
-    for(let i in orders){
-        orderItems.push(new sap.m.ColumnListItem({
-            cells: [
-                new sap.m.Label({text: orders[i].OrderID}),
-                new sap.m.Label({text: orders[i].Freight}),
-                new sap.m.Label({text: orders[i].ShipAddress}),
-            ]
-        }));
-    }
-    let newTable = new sap.m.Table({
-        width: "auto",
-        columns: [ 
-            new sap.m.Column({  header: new sap.m.Label({ text: "{i18n>OrderID}"}) }),
-            new sap.m.Column({  header: new sap.m.Label({ text: "{i18n>Freight}"}) }),
-            new sap.m.Column({  header: new sap.m.Label({ text: "{i18n>ShipAddress}"})})
-            ],
-            items: orderItems,
+            for (let i in orders) {
+                orderItems.push(new sap.m.ColumnListItem({
+                    cells: [
+                        new sap.m.Label({ text: orders[i].OrderID }),
+                        new sap.m.Label({ text: orders[i].Freight }),
+                        new sap.m.Label({ text: orders[i].ShipAddress }),
+                    ]
+                }));
+            }
+            let newTable = new sap.m.Table({
+                width: "auto",
+                columns: [
+                    new sap.m.Column({ header: new sap.m.Label({ text: "{i18n>OrderID}" }) }),
+                    new sap.m.Column({ header: new sap.m.Label({ text: "{i18n>Freight}" }) }),
+                    new sap.m.Column({ header: new sap.m.Label({ text: "{i18n>ShipAddress}" }) })
+                ],
+                items: orderItems,
 
-    }).addStyleClass("sapUISmallMargin");
+            }).addStyleClass("sapUISmallMargin");
 
-    ordersTable.addItem(newTable);
+            ordersTable.addItem(newTable);
 
-    let newTableJSON = new sap.m.Table();
-    newTableJSON.setWidth("auto");
-    newTableJSON.addStyleClass("sapUISmallMargin");
+            let newTableJSON = new sap.m.Table();
+            newTableJSON.setWidth("auto");
+            newTableJSON.addStyleClass("sapUISmallMargin");
 
-    let columnOrderID = new sap.m.Column();
-    let labelOrderID = new sap.m.Label();
-    labelOrderID.bindProperty("text", "i18n>OrderID");
-    columnOrderID.setHeader(labelOrderID);
-    newTableJSON.addColumn(columnOrderID);
+            let columnOrderID = new sap.m.Column();
+            let labelOrderID = new sap.m.Label();
+            labelOrderID.bindProperty("text", "i18n>OrderID");
+            columnOrderID.setHeader(labelOrderID);
+            newTableJSON.addColumn(columnOrderID);
 
-    let columnFreight = new sap.m.Column();
-    let labelFreight = new sap.m.Label();
-    labelFreight.bindProperty("text", "i18n>Freight");
-    columnFreight.setHeader(labelFreight);
-    newTableJSON.addColumn(columnFreight);
+            let columnFreight = new sap.m.Column();
+            let labelFreight = new sap.m.Label();
+            labelFreight.bindProperty("text", "i18n>Freight");
+            columnFreight.setHeader(labelFreight);
+            newTableJSON.addColumn(columnFreight);
 
-    let columnShipAddress = new sap.m.Column();
-    let labelShipAddress = new sap.m.Label();
-    labelShipAddress.bindProperty("text", "i18n>ShipAddress");
-    columnShipAddress.setHeader(labelShipAddress);
-    newTableJSON.addColumn(columnShipAddress);
+            let columnShipAddress = new sap.m.Column();
+            let labelShipAddress = new sap.m.Label();
+            labelShipAddress.bindProperty("text", "i18n>ShipAddress");
+            columnShipAddress.setHeader(labelShipAddress);
+            newTableJSON.addColumn(columnShipAddress);
 
-    let columnListItem = new sap.m.ColumnListItem();
+            let columnListItem = new sap.m.ColumnListItem();
 
-    let cellOrderID = new sap.m.Label();
-    cellOrderID.bindProperty("text", "odataNorthwind>OrderID");
-    columnListItem.addCell(cellOrderID);
+            let cellOrderID = new sap.m.Label();
+            cellOrderID.bindProperty("text", "odataNorthwind>OrderID");
+            columnListItem.addCell(cellOrderID);
 
-    let cellFreight = new sap.m.Label();
-    cellFreight.bindProperty("text", "odataNorthwind>Freight");
-    columnListItem.addCell(cellFreight);
+            let cellFreight = new sap.m.Label();
+            cellFreight.bindProperty("text", "odataNorthwind>Freight");
+            columnListItem.addCell(cellFreight);
 
-    let cellShipAddress = new sap.m.Label();
-    cellShipAddress.bindProperty("text", "odataNorthwind>ShipAddress");
-    columnListItem.addCell(cellShipAddress);
-    
-    let oBindingInfo = {
-        model: "odataNorthwind",
-        path: "Orders",
-        template: columnListItem
-    }
-    newTableJSON.bindAggregation("items", oBindingInfo);
-    newTableJSON.bindElement("odataNorthwind>" + oContext.getPath());
+            let cellShipAddress = new sap.m.Label();
+            cellShipAddress.bindProperty("text", "odataNorthwind>ShipAddress");
+            columnListItem.addCell(cellShipAddress);
 
-    ordersTable2.addItem(newTableJSON);
+            let oBindingInfo = {
+                model: "odataNorthwind",
+                path: "Orders",
+                template: columnListItem
+            }
+            newTableJSON.bindAggregation("items", oBindingInfo);
+            newTableJSON.bindElement("odataNorthwind>" + oContext.getPath());
 
-};
+            ordersTable2.addItem(newTableJSON);
+
+        };
         const Main = Controller.extend("logaligroup.employees.controller.MainView");
         Main.prototype.onValidate = function () {
             let inputEmployee = this.getView().byId('inputEmployee');

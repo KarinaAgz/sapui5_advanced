@@ -1,10 +1,11 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "logaligroup/lists/model/models"
-], (UIComponent, models) => {
+    "logaligroup/employees/model/models",
+    "sap/ui/model/resource/ResourceModel"
+], (UIComponent, models, ResourceModel) => {
     "use strict";
 
-    return UIComponent.extend("logaligroup.lists.Component", {
+    return UIComponent.extend("logaligroup.employees.Component", {
         metadata: {
             manifest: "json",
             interfaces: [
@@ -13,14 +14,22 @@ sap.ui.define([
         },
 
         init() {
-            // call the base component's init function
+            // Llama a la función init del componente base
             UIComponent.prototype.init.apply(this, arguments);
 
-            // set the device model
+            // Configura el modelo i18n
+            const i18nModel = new ResourceModel({
+                bundleName: "logaligroup.employees.i18n.i18n"
+            });
+            this.setModel(i18nModel, "i18n");
+
+            // Configura el modelo del dispositivo
             this.setModel(models.createDeviceModel(), "device");
 
-            // enable routing
+            // Habilita el enrutamiento
             this.getRouter().initialize();
-        }
+        },
+
+        SapID: "training@logaligroup.com"
     });
 });

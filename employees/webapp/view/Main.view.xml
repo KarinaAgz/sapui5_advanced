@@ -7,7 +7,7 @@
     xmlns:f="sap.f"
 >
     <Page
-        id="_IDGenPage1"
+        
         showHeader="false"
     >
         <content>
@@ -29,24 +29,24 @@
                     />
                 </f:midColumnPages>
                 <f:endColumnPages>
-                    <Page id="_IDGenPage2N" />
+                    <Page  >
+
+                    </Page  >
                 </f:endColumnPages>
             </f:FlexibleColumnLayout>
         </content>
         <footer>
-            <Toolbar id="_IDGenToolbar1">
+            <Toolbar >
                 <Label
-                    id="_IDGenLabel1"
                     text="{i18n>layout}"
                     class="sapUISmallMargin"
                 />
                 <Select
-                    id="_IDGenSelect1"
+                    
                     items="{jsonLayout>/Layout}"
                     selectedKey="{jsonLayout>/ActiveKey}"
                 >
                     <core:Item
-                        id="_IDGenItem1"
                         key="{jsonLayout>Key}"
                         text="{jsonLayout>Text}"
                     />

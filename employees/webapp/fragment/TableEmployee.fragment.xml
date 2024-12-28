@@ -37,7 +37,7 @@
             <Label id="lb2" text="{odataNorthwind>LastName} , {odataNorthwind>FirstName}"/>
             <Label id="lb3" text="{odataNorthwind>Country}"/>
             <Label id="lb4" text="{odataNorthwind>City}"/>
-            <core:Icon id="_IDGenIcon1" src="sap-icon://show"  press="showOrders2"></core:Icon>
+            <core:Icon src="sap-icon://show"  press="showOrders2"></core:Icon>
             </cells>
         </ColumnListItem>
         </items>

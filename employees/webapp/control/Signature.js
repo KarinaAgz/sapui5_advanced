@@ -1,5 +1,5 @@
 sap.ui.define([
-    "sap/ui/core/Control",
+    "sap/ui/core/Control"
 
 ], function (Control) {
     return Control.extend("logaligroup.employees.controller.Signature", {
