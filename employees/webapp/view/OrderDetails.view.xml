@@ -18,7 +18,7 @@
                     />
                 </contentLeft>
                 <contentMiddle>
-                    <Text text="{i18n>orderID} {odataNorthwind>OrderID}" />
+                    <Text text="{i18n>orderID}: {odataNorthwind>OrderID}" />
                 </contentMiddle>
             </Bar>
         </customHeader>
@@ -77,18 +77,31 @@
                         />
                     </FlexBox>
                 </l:Grid>
+                <!--
                 <UploadCollection
                     id="uploadCollection"
-                    maximumFileLength="55"
+                    maximumFilenameLength="55"
                     maximumFileSize="10"
                     multiple="true"
                     sameFilenameAllowed="true"
-                    instanceUpload="true"
+                    instantUpload="true"
                     uploadUrl="/sap/opu/odata/sap/YSAPUI5_SRV_01/FileSet"
-                    change="onfileChange"
+                    change="onileChange"
                     uploadComplete="onFileUploadComplete"
                     beforeUploadStarts="onFileBeforeUpload"
                     fileDeleted="onFileDeleted"
+                />
+                -->
+                <UploadSet
+                    id="uploadSet"
+                    uploadUrl="/sap/opu/odata/sap/YSAPUI5_SRV_01/FileSet"
+                    instantUpload="true"
+                    maxFileSize="10"
+                    fileNameLengthExceeded="onFileNameLengthExceeded"
+                    fileSizeExceeded="onFileSizeExceeded"
+                    fileUploadCompleted="onFileUploadComplete"
+                    beforeItemAdded="onBeforeItemAdded"
+                    itemRemoved="onItemRemoved"
                 />
             </Panel>
             <Panel headerText="{i18n>orderProducts}">

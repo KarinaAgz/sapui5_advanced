@@ -6,7 +6,8 @@
                        ${incidenceModel>status} === 1 ? 'sap-icon://alert' :
                        ${incidenceModel>status} === 2 ? 'sap-icon://decline' : '' }" />
     
-    <Title  text="{i18n>incidence} {incidenceModel>index} {path: 'incidenceModel>date', formatter: '.Formatter.dateFormat'}"/>
+    <Title  text="{i18n>incidence} {= $(incidenceModel>IncidenceId} ? parseInt(${incidenceModel>incidenceId}) : ''} 
+            {path: 'incidenceModel>date', formatter: '.Formatter.dateFormat'}"/>
     <ToolbarSpacer />
     <Button icon="sap-icon://save" enabled="{= ${incidenceModel>EnabledSave} === true}"></Button>
     <core:Icon src="sap-icon://delete" press="onDeleteIncidence"/>
@@ -18,6 +19,7 @@
                     <Label  text="{i18n>incidenceDate}" required="true"/>
                     <DatePicker  dateValue="{incidenceModel>date}" change="updateIncidenceCreationDate" valueState="{incidenceModel>creationDateState}"></DatePicker>
                 </VBox>
+
                 <VBox  visible="{=${incidenceModel>CreationDate} !== '' &amp; &amp;${incidenceModel>CreationDate}!==undefined}" class="sapUiSmallMarginEnd">
                     <Text  text="{i18n>incidenceReason}"/>
                     <Input value="{incidenceModel>Reason}" change="updateIncidenceReason" valueState="{incidenceModel>reasonState}" ></Input>

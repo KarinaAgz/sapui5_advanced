@@ -28,8 +28,11 @@ sap.ui.define([
 
             // Habilita el enrutamiento
             this.getRouter().initialize();
+
+            //set the device model
+            this.setModel(models.createDeviceModel(),"device");
         },
 
-        SapID: "training@logaligroup.com"
+        SapId: "training@logaligroup.com"
     });
 });

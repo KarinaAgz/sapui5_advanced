@@ -16,14 +16,18 @@
       ],
       "args": [
         "--open",
-        "index.html"
+        "index.html",
+        "--config",
+        "ui5-local.yaml",
+        "--framework-version",
+        "1.131.1"
       ],
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "outputCapture": "std",
       "env": {
         "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/sap\",\"url\":\"\",\"destination\":\"Northwind\"}]",
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false&sap-ui-support=true",
         "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/sapui5_advanced/employees\"}"
       }
     }

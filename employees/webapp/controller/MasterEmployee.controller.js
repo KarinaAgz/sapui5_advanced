@@ -160,16 +160,7 @@ sap.ui.define([
             ordersTable2.addItem(newTableJSON);
 
         };
-        /*
-        function toOrderDetails(oEvent){
-            let orderID = oevent.getSource().getBindingContext("odataNortwind").getObject().orderID;
-            let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-            oRouter.navTo("RouteOrderDetails", { orderID: orderID });
-         orderID
-        
-        };
-        */
-        //const Main = Controller.extend("logaligroup.employees.controller.MasterEmployee");
+      
         var Main = Base.extend("logaligroup.employees.controller.MasterEmployee");
        
         Main.prototype.onInit = onInit;
@@ -184,24 +175,5 @@ sap.ui.define([
         Main.prototype.showEmployee = showEmployee;
 
         return Main;
-        /*
-        return Controller.extend("logaligroup.employees.controller.MasterEmployee", {
-            onInit: function () {
-
-            },
-            onValidate: function () {
-                let inputEmployee = this.getView().byId('inputEmployee');
-                let valueEmployee = inputEmployee.getValue();
-                if (valueEmployee.length === 6) {
-                    //inputEmployee.setDescription("OK");
-                    this.getView().byId('labelCountry').setVisible(true);
-                    this.getView().byId('slCountry').setVisible(true);
-                } else {
-                    //inputEmployee.setDescription("No OK")
-                    this.getView().byId('labelCountry').setVisible(false);
-                    this.getView().byId('slCountry').setVisible(false);
-                }
-            },
-        });
-        */
+       
     });

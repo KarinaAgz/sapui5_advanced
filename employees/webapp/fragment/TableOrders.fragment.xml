@@ -3,12 +3,11 @@
     xmlns="sap.m"
 >
     <Table
-        id="Table1"
         items="{odataNorthwind>Orders}"
         width="700px"
     >
         <columns>
-            <Column id="_IDGenColumn1">
+            <Column >
                 <header>
                     <Label
                         id="Label1"
@@ -16,18 +15,18 @@
                     />
                 </header>
             </Column>
-            <Column id="Column2">
+            <Column>
                 <header>
                     <Label
-                        id="Label2"
+                        
                         text="{i18n>Freight}"
                     />
                 </header>
             </Column>
-            <Column id="Column3">
+            <Column >
                 <header>
                     <Label
-                        id="Label3"
+                       
                         text="{i18n>ShipAddress}"
                     />
                 </header>
@@ -40,15 +39,15 @@
             >
                 <cells>
                     <Label
-                        id="Label4"
+                        
                         text="{odataNorthwind>OrderID}"
                     />
                     <Label
-                        id="Label5"
+                        
                         text="{odataNorthwind>Freight}"
                     />
                     <Label
-                        id="Label6"
+                        
                         text="{odataNorthwind>ShipAddress}"
                     />
                 </cells>

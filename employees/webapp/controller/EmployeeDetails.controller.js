@@ -1,5 +1,5 @@
 sap.ui.define([
-   
+
    "logaligroup/employees/controller/Base.controller",
    "logaligroup/employees/model/formatter",
    "sap/m/MessageBox"
@@ -7,8 +7,8 @@ sap.ui.define([
 ], function (Base, formatter, MessageBox) {
 
    function onInit() {
-      this._bus=sap.ui.getcore().getEventBus();
-      
+      this._bus = sap.ui.getCore().getEventBus();
+
    };
 
    function onCreateIncidence() {
@@ -23,15 +23,38 @@ sap.ui.define([
       tableIncidence.addContent(newIncidence);
    };
 
+   function onDeleteIncidence(oEvent) {
+
+      var contexjObj = oEvent.getSource().getBindingContext("incidenceModel").getObject();
+
+      MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("confirmDeleteIncidence"), {
+         onClose: function (oAction) {
+            if (oAction === "OK") {
+
+               this._bus.publish("incidence", "onDeleteIncidence", {
+                  IncidenceId: contextjObj.IncidenceId,
+                  SapId: contexjObj.SapId,
+                  EmployeeId: contexjObj.EmployeeId
+               });
+            }
+         }.bind(this)
+      })
+   };
+
+   function onSaveIncidence(oEvent) {
+      var incidence = oEvent.getSource().getParent().getParent();
+      var incidenceRow = incidence.getBindingContext("incidenceModel");
+      this._bus.publish("incidence", "onSaveIncidence", { incidenceRow: incidenceRow.sPath.replace('/', '') })
+   };
 
    function updateIncidenceCreationDate(oEvent) {
       let context = oEvent.getSource().getBindingContext("incidenceModel");
-      let contextObject = context.getObject();
+      let contextObj = context.getObject();
       let oResourceBundle = this.getview().getModel("i18n").getResourceBundle();
 
       if (!oEvent.getSource().isValidateValue()) {
-         contextObject._ValidateDate = false;
-         contextObject.CreationDateState = "Error";
+         contextObj._ValidateDate = false;
+         contextObj.CreationDateState = "Error";
          MessageBox.error(oResourceBundle.getText("errorCreationDateValue"), {
             title: "Error",
             onClose: null,
@@ -42,15 +65,15 @@ sap.ui.define([
             textDirection: sap.ui.core.textDirection.inherit
          });
       } else {
-         contextObject._ValidateDate = true;
-         contextObject.CreationDateState = "None";
-         contextObject._ValidateDate = false;
-         contextObject.CreationDateX = true;
+         contextObj.CreationDateX = true;
+         contextObj._ValidateDate = true;
+         contextObj.CreationDateState = "None";
+
       }
-      if (oEvent.getSource().isValidateValue() && contextObject.Reason) {
-         contextObject.EnabledSave = true;
+      if (oEvent.getSource().isValidateValue() && contextObj.Reason) {
+         contextObj.EnabledSave = true;
       } else {
-         contextObject.EnabledSave = false;
+         contextObj.EnabledSave = false;
       }
       context.getModel().refresh();
    }
@@ -58,58 +81,49 @@ sap.ui.define([
 
    function updateIncidenceReason(oEvent) {
       let context = oEvent.getSource().getBindingContext("incidenceModel");
-      let contextObject = context.getObject();
+      let contextObj = context.getObject();
 
-      if (oEvent.getSource().getValue()) {
-         contextObject.ReasonState = "None";
-         contextObject._ValidateDate = false;
-         contextObject.ReasonX = true;
+      if (oEvent.getSource().isValidateValue()) {
+         contextObj.ReasonX = true;
+         contextObj._ValidateDate = false;
+         contextObj.ReasonState = "None";
+
       } else {
-         contextObject.CreationDateState = "Error";
+         contextObj.CreationDateState = "Error";
       }
 
-      if (contextObject._ValidateDate && oEvent.getSource().getValue()) {
-         contextObject.EnabledSave = true;
+      if (contextObj._ValidateDate && oEvent.getSource().getValue()) {
+         contextObj.EnabledSave = true;
       } else {
-         contextObject.EnabledSave = false;
+         contextObj.EnabledSave = false;
       }
 
       context.getModel().refresh();
    }
 
 
-   function onDeleteIncidence(oEvent) {
-      let tableIncidence = this.getView().byId("tableIncidence");
-      let rowIncidence = oEvent.getSource().getParent().getParent();
-      let incidenceModel = this.getView().getModel("incidenceModel");
-      let odata = incidenceModel.getData();
-      let contextObj = rowIncidence.getBindingContext("incidenceModel");
-      odata.splice(contextObj.index, 1);
-      for (let i in odata) {
-         odata[i].index = parseInt(i) + 1;
-      }
-      incidenceModel.refresh();
-      tableIncidence.removeContent(rowIncidence);
-      for (let j in tableIncidence.getContent()) {
-         tableIncidence.getContent()[j].bindElement("incidenceModel>/" + j);
-      }
+   function updateIncidenceType(oEvent) {
+
+      var context = oEvent.getSource().getBindingContext("incidenceModel");
+      var contexjObj = context.getObject();
+      contexjObj.TypeX = true;
+
    };
 
-   function onSaveIncidence(oEvent){
-      var incidence=oEvent.getSource().getParent().getParent();
-      var incidenceRow=incidence.getBindingContext("incidenceModel");
-      var temp=incidenceRow.sPath.replace('/','');
-      this._bus.publish("incidence","onSaveIncidence",{incidenceRow: incidenceRow.sPath.replace('/','')})
-   }
-   
-   let Main = Base.extend("logaligroup.employees.controller.EmployeeDetails", {});
 
-   Main.prototype.onInit = onInit;
-   Main.prototype.onCreateIncidence = onCreateIncidence;
-   Main.prototype.Formatter = formatter;
-   Main.prototype.onDeleteIncidence = onDeleteIncidence;
-   Main.prototype.updateIncidenceCreationDate = updateIncidenceCreationDate;
-   Main.prototype.updateIncidenceReason = updateIncidenceReason;
 
-   return Main;
+   var EmployeeDetails = Base.extend("logaligroup.employees.controller.EmployeeDetails", {});
+
+  EmployeeDetails.prototype.onInit = onInit;
+  EmployeeDetails.prototype.onCreateIncidence = onCreateIncidence;
+  EmployeeDetails.prototype.onDeleteIncidence = onDeleteIncidence;
+  EmployeeDetails.prototype.Formatter = formatter;
+  EmployeeDetails.prototype.onSaveIncidence=onSaveIncidence;
+
+  
+  EmployeeDetails.prototype.updateIncidenceCreationDate = updateIncidenceCreationDate;
+  EmployeeDetails.prototype.updateIncidenceReason = updateIncidenceReason;
+  EmployeeDetails.prototype.updateIncidenceType=updateIncidenceType;
+
+   return EmployeeDetails;
 });

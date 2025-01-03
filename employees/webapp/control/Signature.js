@@ -32,17 +32,16 @@ sap.ui.define([
             oRM.write(">");
             oRM.write("<canvas width='" + oControl.getProperty("width") + "' height='" + oControl.getProperty("height")
                 + "'");
-            oRM.write(">");
             oRM.write("</canvas>");
             oRM.write("</div>");
         },
 
         onAfterRendering: function () {
-            let canvas = document.querySelector("canvas");
+            var canvas = document.querySelector("canvas");
             try {
                 this.signaturePad = new SignaturePad(canvas);
                 this.signaturePad.fill = false;
-                canvas.addEventListener("mousedown",function() {
+                canvas.addEventListener("mousedown", function () {
                     this.signaturePad.fill = true;
                 }.bind(this));
             } catch (e) {
@@ -50,21 +49,21 @@ sap.ui.define([
             }
         },
 
-        clear: function() {
+        clear: function () {
             this.signaturePad.clear();
             this.signaturePad.fill = false;
         },
 
-        isFill: function(){
+        isFill: function () {
             return this.signaturePad.fill;
         },
 
-        getSignature: function(){
+        getSignature: function () {
             return this.signaturePad.toDataURL();
         },
 
-        
-        setSignature: function(signature){
+
+        setSignature: function (signature) {
             this.signaturePad.fromDataURL(signature);
         },
     });

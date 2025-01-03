@@ -14,7 +14,9 @@ sap.ui.define([
     function (Controller, History, Messagebox, Filter, FilterOperator) {
 
         function _onObjectMatched(oEvent) {
+
             this.onClearSignature(oEvent);
+
             this.getView().bindElement({
                 path: "/Orders(" + oEvent.getParameter("arguments").orderID + ")",
                 model: "odataNorthwind",
@@ -81,16 +83,17 @@ sap.ui.define([
                 }
             },
             onClearSignature: function (oEvent) {
-                let signature = this.byId("signature");
+                var signature = this.byId("signature");
                 signature.clear();
             },
+
             factoryOrderDetails: function (listId, oContext) {
                 let contextObject = oContext.getObject();
                 contextObject.Currency = "EUR";
                 let unitsInStock = oContext.getModel().getProperty("/Products(" + contextObject.ProductId + ")/UnitsInStock");
 
                 if (contextObject.Quantity <= unitsInStock) {
-                    let objectListItem = sap.m.ObjectListItem({
+                    var objectListItem = new sap.m.ObjectListItem({
                         title: "{odataNorthwind>/Products(" + contextObject.ProductId + ")/ProductName} ({odataNorthwind>Quantity})",
                         number: "{ parts : [ { path: 'odataNorthwind>UnitPrice'}, { path: 'odataNorthwind>Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}",
                         numberUnit: "{odataNorthwind>Currency}",
@@ -106,13 +109,14 @@ sap.ui.define([
                                 contentRight: new sap.Label({ text: "{ parts : [ { path: 'odataNorthwind>UnitPrice'}, { path: 'odataNorthwind>Currency'} ], type: 'sap.ui.model.type.Currency'}" })
                             })
                         ]
-                    })
+                    });
+                    return customListItem;
                 }
             },
 
             onSaveSignature: function (oEvent) {
-                const signature = this.byId("onSaveSignature");
-                const oResourceBundle = this.getView().getModel("i18n").getResourcebundle();
+                const signature = this.byId("signature");
+                const oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
                 let signaturePng;
 
                 if (!signature.isFill()) {
@@ -130,10 +134,10 @@ sap.ui.define([
                 };
                 this.getView().getModel("incidenceModel").create("/signatureSet", body, {
                     success: function () {
-                        Messagebox.information(oResourceBundle.getText("signatureSave"));
+                        Messagebox.information(oResourceBundle.getText("signatureSaved"));
                     },
                     error: function () {
-                        Messagebox.information(oResourceBundle.getText("signatureNotSave"));
+                        Messagebox.information(oResourceBundle.getText("signatureNotSaved"));
                     }
                 })
             },
