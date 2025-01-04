@@ -16,10 +16,9 @@
     },
     "dataSources": {
       "Northwind.svc": {
-        "uri": "/v2/Northwind/Northwind.svc/",
+        "uri": "Northwind/v2/Northwind/Northwind.svc/",
         "type": "OData",
         "settings": {
-          "annotations": [],
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
@@ -75,8 +74,8 @@
         }
       },
       "odataNorthwind": {
-        "type": "sap.ui.model.odata.v2.ODataModel",
-        "dataSource": "northwind.svc",
+        
+        "dataSource": "Northwind.svc",
         "preload": true,
         "settings": {
           "defaultOperationMode": "Server",

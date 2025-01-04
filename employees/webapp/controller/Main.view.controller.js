@@ -74,17 +74,7 @@ sap.ui.define([
 
             sap.m.MessageToast.show(objectContext.PostalCode);
         };
-        /*
-function myCheck() {
-    let inputEmployee = this.byId('inputEmployee');
-    let valueEmployee = inputEmployee.getValue();
-    if (valueEmployee.length === 6) {
-        inputEmployee.setDescription("OK");
-    } else {
-        inputEmployee.setDescription("No OK")
-    }
-};
-*/
+
         function onShowCity() {
             let oJsonModelConfig = this.getView().getModel("jsonConfig");
             oJsonModelConfig.setProperty("/visibleCity", true);

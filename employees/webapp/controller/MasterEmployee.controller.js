@@ -27,14 +27,16 @@ sap.ui.define([
             }
             let oList = this.getView().byId("tableEmployee");
             let oBinding = oList.getBinding("items");
-            oBinding.Filter(filters);
+            oBinding.filter(filters);
         };
+
 
         function onClearFilter() {
             let oModel = this.getView().getModel("jsonCountries");
             oModel.setProperty("/EmployeeId", "");
             oModel.setProperty("/CountryKey", "");
         };
+
 
         function showPostalCode(oEvent) {
             let itemPressed = oEvent.getSource();
@@ -43,6 +45,7 @@ sap.ui.define([
 
             sap.m.MessageToast.show(objectContext.PostalCode);
         };
+ 
  
         function onShowCity() {
             let oJsonModelConfig = this.getView().getModel("jsonConfig");
@@ -59,7 +62,7 @@ sap.ui.define([
 
         };
 
-        function showOrders2(oEvent) {
+        function showOrders(oEvent) {
             let itemPressed = oEvent.getSource();
             let oContext = itemPressed.getBindingContext("odataNorthwind");
             if (!this._oDialogOrders) {
@@ -80,7 +83,7 @@ sap.ui.define([
             this._bus.publish("flexible", "showEmployee", path)
         }
 
-        function showOrders(oEvent) {
+        /*function showOrders(oEvent) {
             let ordersTable = this.getView().byId("ordersTable");
             let ordersTable2 = this.getView().byId("ordersTable2");
             ordersTable.destroyItems();
@@ -160,7 +163,7 @@ sap.ui.define([
             ordersTable2.addItem(newTableJSON);
 
         };
-      
+      */
         var Main = Base.extend("logaligroup.employees.controller.MasterEmployee");
        
         Main.prototype.onInit = onInit;
@@ -170,7 +173,6 @@ sap.ui.define([
         Main.prototype.onShowCity = onShowCity;
         Main.prototype.onHideCity = onHideCity;
         Main.prototype.showOrders = showOrders;
-        Main.prototype.showOrders2 = showOrders2;
         Main.prototype.onCloseOrders = onCloseOrders;
         Main.prototype.showEmployee = showEmployee;
 

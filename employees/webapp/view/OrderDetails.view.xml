@@ -77,7 +77,7 @@
                         />
                     </FlexBox>
                 </l:Grid>
-                <!--
+            
                 <UploadCollection
                     id="uploadCollection"
                     maximumFilenameLength="55"
@@ -91,18 +91,7 @@
                     beforeUploadStarts="onFileBeforeUpload"
                     fileDeleted="onFileDeleted"
                 />
-                -->
-                <UploadSet
-                    id="uploadSet"
-                    uploadUrl="/sap/opu/odata/sap/YSAPUI5_SRV_01/FileSet"
-                    instantUpload="true"
-                    maxFileSize="10"
-                    fileNameLengthExceeded="onFileNameLengthExceeded"
-                    fileSizeExceeded="onFileSizeExceeded"
-                    fileUploadCompleted="onFileUploadComplete"
-                    beforeItemAdded="onBeforeItemAdded"
-                    itemRemoved="onItemRemoved"
-                />
+                
             </Panel>
             <Panel headerText="{i18n>orderProducts}">
                 <List

@@ -100,8 +100,8 @@ sap.ui.define([
 
             if (typeof incidenceModel[data.incidenceRow].IncidenceId == 'undefined') {
                 var body = {
-                    SapID: this.getOwnerComponent().SapId,
-                    employeeId: employeeId.toString(),
+                    SapId: this.getOwnerComponent().SapId,
+                    EmployeeId: employeeId.toString(),
                     CreationDate: incidenceModel[data.incidenceRow].CreationDate,
                     Type: incidenceModel[data.incidenceRow].Type,
                     Reason: incidenceModel[data.incidenceRow].Reason

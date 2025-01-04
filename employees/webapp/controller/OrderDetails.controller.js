@@ -54,7 +54,8 @@ sap.ui.define([
 
             this.biId("uploadCollection").bindAggregation("items", {
                 path: "incidenceModel>/FilesSet",
-                filters: [new Filter("OrderId", FilterOperator.EQ, orderId),
+                filters: [
+                new Filter("OrderId", FilterOperator.EQ, orderId),
                 new Filter("SapId", FilterOperator.EQ, this.getOwnerComponent().SapId),
                 new Filter("EmployeeId", FilterOperator.EQ, employeeId)
                 ],
@@ -142,26 +143,26 @@ sap.ui.define([
                 })
             },
 
-            onFileBeforeUpload(oEvent) {
+            onFileBeforeUpload :function(oEvent) {
                 let filename = oEvent.getParameter("filename");
                 let objContext = oEvent.getSource().getBindingContext("odataNorthwind", getObject());
-                let objCustomerHeaderSlug = new sap.m.UploadCollectionParameter({
+                let oCustomerHeaderSlug = new sap.m.UploadCollectionParameter({
                     name: "slug",
                     value: objContext.OrderID + ";" + this.getOwnerComponent().SapId + ";" + objContext.EmployeeID + ";" + filename
                 });
-                oEvent.getParameters().addHeaderParameter(objCustomerHeaderSlug);
+                oEvent.getParameters().addHeaderParameter(oCustomerHeaderSlug);
             },
 
             onfileChange: function (oEvent) {
                 let oUploadCollection = oEvent.getSource();
 
                 //Header token CSRF - cross-site request forgery
-                let ocustomerHeaderToken = new sap.m.UploadCollectionParameter({
+                let oCustomerHeaderToken = new sap.m.UploadCollectionParameter({
                     name: "x-csrf-token",
                     value: this.getView().getModel("incidenceModel").getSecurityToken()
 
                 });
-                oUploadCollection.addHeaderParameter(ocustomerHeaderToken);
+                oUploadCollection.addHeaderParameter(oCustomerHeaderToken);
             },
 
             onFileUploadComplete: function (oEvent) {
@@ -183,9 +184,9 @@ sap.ui.define([
 
             },
 
-            downloadfile: function (oEvent) {
+            downloadFile: function (oEvent) {
                 const sPath = oEvent.getSource().getBindingContext("incidenceModel").getPath();
-                window.open("/sap/opu/odata/sap/YSAPUI%_SRV_01" + sPath + "/$value");
+                window.open("/sap/opu/odata/sap/YSAPUI5_SRV_01" + sPath + "/$value");
 
             }
         });

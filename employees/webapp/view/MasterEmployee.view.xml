@@ -11,32 +11,27 @@
     >
         <content>
             <HBox
-                id="_IDGenHBox1"
                 wrap="Wrap"
             >
-                <Panel id="p1">
+                <Panel >
                     <Label
-                        id="labelEmployee"
                         text="{i18n>labelEmployee}"
                         class="sapUiSmallMargin"
                         labelFor="inputEmployee"
                     />
                     <Input
-                        id="inputEmployee"
                         value="{jsonCountries>/EmployeeId}"
                         maxLength="10"
                         width="200px"
                         class="sapUiSmallMarginEnd"
                     />
                     <Label
-                        id="labelCountry"
                         text="{i18n>labelCountry}"
                         class="sapUiSmallMargin"
                         labelFor="slCountry"
                         visible="true"
                     />
                     <Select
-                        id="slCountry"
                         selectedKey="{jsonCountries>/CountryKey}"
                         forceSelection="false"
                         visible="true"
@@ -44,7 +39,6 @@
                     >
                         <items>
                             <core:Item
-                                id="item1"
                                 key="{jsonCountries>Key}"
                                 text="{jsonCountries>Text}"
                             />
@@ -70,8 +64,8 @@
                 fragmentName="logaligroup.employees.fragment.TableEmployee"
                 type="XML"
             />
-            <HBox id="ordersTable" />
-            <HBox id="ordersTable2" />
+            <HBox />
+            <HBox />
         </content>
     </Page>
 </mvc:View>

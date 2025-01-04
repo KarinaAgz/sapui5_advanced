@@ -23,7 +23,7 @@ sap.ui.define([
       tableIncidence.addContent(newIncidence);
    };
 
-   function onDeleteIncidence(oEvent) {
+   /*function onDeleteIncidence(oEvent) {
 
       var contexjObj = oEvent.getSource().getBindingContext("incidenceModel").getObject();
 
@@ -39,6 +39,25 @@ sap.ui.define([
             }
          }.bind(this)
       })
+   };*/
+
+   function onDeleteIncidence(oEvent){
+      var tableIncidence=this.getView().byId("tableIncidence");
+      var rowIncidence=oEvent.getSource().getParent().getParent();
+      var incidenceModel= this.getView().getModel("incidenceModel");
+      var odata=incidenceModel.getData();
+      var contexObj=rowIncidence.getBindingContext("incidenceModel");
+
+      odata.splice(contexObj.index-1,1);
+      for (var i in odata){
+         odata[i].index=parseInt(i)+1;
+      };
+      incidenceModel.refresh(),
+      tableIncidence.removeContent(rowIncidence);
+
+      for (var j in tableIncidence.getContent()){
+         tableIncidence.getContent()[j].bindElement("incidenceModel>/"+j);
+      }
    };
 
    function onSaveIncidence(oEvent) {
