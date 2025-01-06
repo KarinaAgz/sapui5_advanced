@@ -66,7 +66,7 @@ sap.ui.define([
 
                 var oResourceBundle=this.getView().getModel("i18n").getResourceBundle();
 
-                this.getView().getModel("incidenceModel").remove("/IncidenceId='" + data.IncidenceId +
+                this.getView().getModel("incidenceModel").remove("/IncidentsSet(IncidenceId='" + data.IncidenceId +
                     "',SapId='" + data.SapId +
                     ",EmployeeId='" + data.EmployeeId + "')",{
                     success: function () {
@@ -115,7 +115,8 @@ sap.ui.define([
 
                     }.bind(this),
                     error: function (e) {
-                        sap.m.MessageToast.show(oResourceBundle.getText("odataSaveKO"));
+                        //sap.m.MessageToast.show(oResourceBundle.getText("odataSaveKO"));
+                        MessageBox.success(oResourceBundle.getText("odataSaveKO"));
 
                     }.bind(this)
                 })

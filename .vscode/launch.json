@@ -26,11 +26,11 @@
       "internalConsoleOptions": "openOnSessionStart",
       "outputCapture": "std",
       "env": {
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/sapui5_advanced/employees\"}",
         "FIORI_TOOLS_UI5_VERSION": "1.131.1",
         "FIORI_TOOLS_UI5_URI": "https://ui5.sap.com",
-        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/sap\",\"url\":\"\",\"destination\":\"logaligroupERP\"}]"
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/sapui5_advanced/employees\"}",
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/sap\",\"url\":\"\",\"destination\":\"Northwind\"}]"
       }
     }
   ]

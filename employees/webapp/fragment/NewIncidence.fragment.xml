@@ -1,19 +1,20 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
     <Panel >
-    <headerToolbar>
-    <Toolbar  >
-    <core:Icon  src="{= ${incidenceModel>status} === 0 ? 'sap-icon://accept' : 
-                       ${incidenceModel>status} === 1 ? 'sap-icon://alert' :
-                       ${incidenceModel>status} === 2 ? 'sap-icon://decline' : '' }" />
+
+        <headerToolbar>
+            <Toolbar  >
+                 <core:Icon  src="{= ${incidenceModel>status} === 0 ? 'sap-icon://accept' : 
+                                    ${incidenceModel>status} === 1 ? 'sap-icon://alert' :
+                                    ${incidenceModel>status} === 2 ? 'sap-icon://decline' : '' }" />
     
-    <Title  text="{i18n>incidence}  {= $(incidenceModel>IncidenceId} ? parseInt(${incidenceModel>incidenceId}) : ''} 
-            {path: 'incidenceModel>CreationDate', formatter: '.Formatter.dateFormat'}"/>
-    <ToolbarSpacer />
-    <Button icon="sap-icon://save" press="onSaveIncidence" "{= ${incidenceModel>EnabledSave} === true}"></Button>
-    <core:Icon src="sap-icon://delete" press="onDeleteIncidence"/>
-    </Toolbar>
+                    <Title  text="{i18n>incidence}  {= $(incidenceModel>IncidenceId} ? parseInt(${incidenceModel>IncidenceId}) : ''} 
+                            {path: 'incidenceModel>CreationDate', formatter: '.Formatter.dateFormat'}"/>
+            <ToolbarSpacer />
+             <Button icon="sap-icon://save" press="onSaveIncidence" enabled="{= ${incidenceModel>EnabledSave} === true}"></Button>
+            <core:Icon src="sap-icon://delete" press="onDeleteIncidence"/>
+            </Toolbar>
     </headerToolbar>
-        <content>
+            <content>
             <HBox >
                 <VBox  class="sapUiSmallMarginEnd">
                     <Label  text="{i18n>incidenceDate}" required="true"/>

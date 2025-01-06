@@ -129,7 +129,7 @@
         },
         {
           "name": "RouteOrderDetails",
-          "pattern": "OrderDetails/{orderID}",
+          "pattern": "OrderDetails/{OrderID}",
           "target": [
             "TargetOrderDetails"
           ]

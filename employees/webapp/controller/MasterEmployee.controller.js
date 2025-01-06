@@ -20,9 +20,11 @@ sap.ui.define([
             let filters = [];
 
             if (oJSON.EmployeeId !== "") {
+                //@ts-ignore
                 filters.push(new Filter("EmployeeID", FilterOperator.EQ, oJSON.EmployeeId));
             }
             if (oJSON.CountryKey !== "") {
+                //@ts-ignore
                 filters.push(new Filter("Country", FilterOperator.EQ, oJSON.CountryKey));
             }
             let oList = this.getView().byId("tableEmployee");
@@ -40,7 +42,7 @@ sap.ui.define([
 
         function showPostalCode(oEvent) {
             let itemPressed = oEvent.getSource();
-            let oContext = itemPressed.getBindingContext("odataNorthwind");
+            let oContext = itemPressed.getBindingContext("jsonEmployees");
             let objectContext = oContext.getObject();
 
             sap.m.MessageToast.show(objectContext.PostalCode);
@@ -63,12 +65,18 @@ sap.ui.define([
         };
 
         function showOrders(oEvent) {
+
+            //get selected Controller
             let itemPressed = oEvent.getSource();
+
+            //Context fron the model
             let oContext = itemPressed.getBindingContext("odataNorthwind");
             if (!this._oDialogOrders) {
                 this._oDialogOrders = sap.ui.xmlfragment("logaligroup.employees.fragment.DialogOrders", this);
                 this.getView().addDependent(this._oDialogOrders);
             }
+
+            //Dialog bindin to the context to have access to the data of selected item
             this._oDialogOrders.bindElement("odataNorthwind>" + oContext.getPath());
             this._oDialogOrders.open();
 
@@ -79,7 +87,7 @@ sap.ui.define([
         }
 
         function showEmployee(oEvent) {
-            let path = oEvent.getSource().getBindingContext("odataNorthwind").getPath();
+            var path = oEvent.getSource().getBindingContext("odataNorthwind").getPath();
             this._bus.publish("flexible", "showEmployee", path)
         }
 
@@ -175,6 +183,7 @@ sap.ui.define([
         Main.prototype.showOrders = showOrders;
         Main.prototype.onCloseOrders = onCloseOrders;
         Main.prototype.showEmployee = showEmployee;
+        Main.prototype.toOrderDetails=toOrderDetails
 
         return Main;
        
