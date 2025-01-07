@@ -51,7 +51,7 @@
                         />
                         <Text
                            
-                            text="{odataNorthwind>Title}"
+                            text="{odataNorthwind>title}"
                             class="boldText"
                         />
                     </VBox>

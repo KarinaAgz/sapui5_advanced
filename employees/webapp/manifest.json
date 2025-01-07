@@ -16,14 +16,14 @@
     },
     "dataSources": {
       "Northwind.svc": {
-        "uri": "Northwind/v2/Northwind/Northwind.svc/",
+        "uri": "https://services.odata.org/V2/Northwind/Northwind.svc/",
         "type": "OData",
         "settings": {
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
       },
-      "YSAPUI5_SRV_01":{
+      "YSAPUI5_SRV_01": {
         "uri": "/sap/opu/odata/sap/YSAPUI5_SRV_01/",
         "type": "OData",
         "settings": {
@@ -74,7 +74,7 @@
         }
       },
       "odataNorthwind": {
-        
+        "type": "sap.ui.model.odata.v2.ODataModel",
         "dataSource": "Northwind.svc",
         "preload": true,
         "settings": {
@@ -84,17 +84,17 @@
           "refreshAfterChange": false
         }
       },
-      "incidenceModel":{
+      "incidenceModel": {
         "type": "sap.ui.model.odata.v2.ODataModel",
         "dataSource": "YSAPUI5_SRV_01",
-        "preload":true,
+        "preload": true,
         "settings": {
-          "defaultOperationMode":"Server",
+          "defaultOperationMode": "Server",
           "defaultBindingMode": "TwoWay",
-          "defaultCountMode":"Request",
-          "refreshAfterChange":false,
-          "useBatch":false,
-          "defaultUpdateMethod":"Put"
+          "defaultCountMode": "Request",
+          "refreshAfterChange": false,
+          "useBatch": false,
+          "defaultUpdateMethod": "Put"
         }
       },
       "jsonLayout": {
@@ -157,3 +157,4 @@
     }
   }
 }
+
